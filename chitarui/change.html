@@ -1,0 +1,110 @@
+
+<html>
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
+  <body>
+  <div style="background:#2980b9; position:absolute; height:620px; width:1340px;">
+    <div style="background:#7f8c8d; position:absolute; height:620px; width:200px; margin-left:310px">
+      <img src="car.png" class="car" style="z-index:1000; position:absolute; height:70px; width:34px; margin-top:540px; margin-left:293px"></img>
+      <img src="M.png" class="monster" style="z-index:1000; position:absolute; height:100px; width:50px; margin-top:440px; margin-left:75px"></img>
+      <img src="M3.png" class="monster" style="z-index:1000;position:absolute; height:60px; width:80; margin-top:140px; margin-left:60px"></img>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:42.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:167.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:292.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:417.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:552.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:black; position:absolute; height:620px; width:2px; margin-left:0px">
+      </div>
+    </div>
+    <div style="background:#7f8c8d; position:absolute; height:620px; width:200px; margin-left:520px">
+      <img src="M2.png" class="monster" style="z-index:1000; position:absolute; height: 50px; width:60px; margin-top:300px; margin-left: 75px"></img>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:42.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:167.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:292.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:417.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:white; position:absolute; height:40px; width:7px; margin-top:552.5px; margin-left:96.5px">
+      </div>
+      <div class="strips" style="background:black; position:absolute; height:620px; width:2px; margin-left:199px">
+      </div>
+    </div>
+    <div style="background:black; position:absolute; height:620px; width:10px; margin-left:510px">
+    </div>
+    <div style="border:5px white dotted; background:black; height:400px; width:400px; margin-left:800px; margin-top:150px; position:absolute">
+      <center>
+        <p class="score" style="font-family: 'Segment7Standard'; color:red; font-size:75px; margin-top:20px; margin-left:-40px">SCORE</p>
+        <p class="score" style="font-family: 'Segment7Standard'; color:red; font-size:100px; margin-top:50px; margin-left:-40px">00</p>
+      <div><button type="button" name="button" onclick="start()" style="background:#800080; margin-top:-100px; height:35px; width:100px; position:relative;">START</button>
+    </div><div style="margin-top:-60px"><button type="button" name="button1" onclick="switch1()" style="background:Yellow; height:35px; width:100px; position:relative;">SWITCH</button>
+    </div>
+    </center>
+    </div>
+  </div>
+
+</body>
+  <script>
+  var score = 0;
+    function start() {
+      var strips = document.getElementsByClassName("strips");
+      window.setInterval(function () {
+        for (var i=0; i < strips.length; i++) {
+          var strip = strips[i];
+          strip.style["margin-top"] = (parseInt(strip.style["margin-top"]) + 5)%625;
+        }
+    }, 150)
+
+    window.setInterval(function()
+     {
+       var monster = document.getElementsByClassName("monster");
+      for (var j=0; j < monster.length; j++)
+       {
+      var monsters = monster[j];
+      monsters.style["margin-top"] = (parseInt(monsters.style["margin-top"]) + 5)%625;
+      var car1 = document.getElementsByClassName("car")[0];
+      if (monsters.getBoundingClientRect().top == car1.getBoundingClientRect().top &&
+      monsters.getBoundingClientRect().left < car1.getBoundingClientRect().left &&
+      monsters.getBoundingClientRect().right > car1.getBoundingClientRect().right ) {
+        alert("Game Over, Score is " + score + " ,Press Ok to start again");
+        score = 0;
+        window.location.reload();
+      }
+
+      if(monsters.getBoundingClientRect().top == 548) {
+        score = score + 10;
+        debugger;
+        document.getElementsByClassName("score")[0].innerHTML = score;
+      }
+       }
+     }, 137)
+    }
+  </script>
+  <script>
+
+  function switch1() {
+    var car1 = document.getElementsByClassName("car")[0];
+  // console.log("inside switch"+car1);
+  if(car1.style["marginLeft"] == "83px")
+    {car1.style["marginLeft"] = "293px"}
+    else{car1.style["marginLeft"] = "83px"}
+  }
+
+  document.onkeydown = function(e) {
+   if (e.keyCode == 32) {
+      var car1 = document.getElementsByClassName("car")[0];
+      if(car1.style["marginLeft"] == "83px") {
+          car1.style["marginLeft"] = "293px"
+      }
+      else {
+          car1.style["marginLeft"] = "83px"
+        }
+    }
+  }
+  </script>
+</html>
